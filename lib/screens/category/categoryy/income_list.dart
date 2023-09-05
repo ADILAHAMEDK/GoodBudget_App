@@ -12,12 +12,14 @@ class IncomeList extends StatelessWidget {
      builder: (BuildContext ctx, List<CategoryModel> newlist,Widget? _){
       return ListView.separated(
       itemBuilder: (ctx,index){
-        final Category = newlist[index];
+        final category = newlist[index];
         return Card(
           child: ListTile(
-            title:Text(Category.name),
-            trailing: IconButton(onPressed: (){},
-             icon:const Icon(Icons.delete)),
+            title:Text(category.name),
+            trailing: IconButton(onPressed: (){
+              CategoryDB.instance.deleteCategory(category.id);
+            },
+             icon:const Icon(Icons.delete,color: Colors.red,)),
           ),
         );
     },

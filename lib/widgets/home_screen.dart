@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:money_manager/category/popup.dart';
-import 'package:money_manager/category/screen_category.dart';
+import 'package:money_manager/db_function/transaction/transaction_db.dart';
+import 'package:money_manager/screens/category/categoryy/popup.dart';
+import 'package:money_manager/screens/category/categoryy/screen_category.dart';
 import 'package:money_manager/db_function/category/category_db.dart';
 import 'package:money_manager/models/category/category_model.dart';
-import 'package:money_manager/setting/screen_setting.dart';
-import 'package:money_manager/transaction/screen_transaction.dart';
+import 'package:money_manager/screens/category/setting/screen_setting.dart';
+import 'package:money_manager/screens/category/transaction/add_transaction.dart';
+import 'package:money_manager/screens/category/transaction/screen_transaction.dart';
+import 'package:money_manager/screens/charts/screen_chart.dart';
 import 'package:money_manager/widgets/bottom_navigation_bar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,18 +18,25 @@ class HomeScreen extends StatelessWidget {
   final _pages = [
    const ScreenTransaction(),
    const ScreenCategory(),
+   Chart(checkboxStatus: true, currentDate: DateTime.now()
+   
+   ),
    const ScreenSettings(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(
-        title:const Text('Money Manager'),
-        centerTitle: true,
-      ),
+      
+      // appBar: AppBar(
+      //   title:const Text('Money Manager'),
+      //   centerTitle: true,
+      // ),
+
+          
       bottomNavigationBar:const BottomNavBar(),
       body: SafeArea(
+        
         child: ValueListenableBuilder(
           valueListenable: selectedIndexNotifier,
        builder: (BuildContext context, int updatedIndex, _) {
@@ -37,6 +47,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(onPressed: (){
         if(selectedIndexNotifier.value == 0) {
           print('add transaction');
+          Navigator.of(context).pushNamed(AddTransactionPage.routeName);
         }else{
            print('add category');
 
@@ -50,8 +61,9 @@ class HomeScreen extends StatelessWidget {
           //  CategoryDB().insertCategory(_sample);
         }
       },
-      child: Icon(Icons.add),
-      ),
-    );
+      backgroundColor:   const Color.fromARGB(255, 12, 46, 62),
+      child:const Icon(Icons.add),
+      ), 
+     );
   }
 }

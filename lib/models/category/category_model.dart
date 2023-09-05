@@ -8,10 +8,11 @@ enum CategoryType{
   @HiveField(1)
   expense,
 }
+
 @HiveType(typeId: 1)
 class CategoryModel{
   @HiveField(0)
-  final String id;
+  late final String id;
 
   @HiveField(1)
   final String name;
@@ -31,6 +32,7 @@ class CategoryModel{
 
   @override
   String toString() {
+    print('{$name $type}');
     return '{$name $type}';
   }
 }

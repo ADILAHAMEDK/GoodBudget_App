@@ -1,7 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
-
 import 'package:flutter/material.dart';
-import 'package:money_manager/db_function/category/category_db.dart';
 import 'package:money_manager/db_function/transaction/transaction_db.dart';
 import 'package:money_manager/models/category/category_model.dart';
 import 'package:money_manager/widgets/home_screen.dart';
@@ -10,7 +7,6 @@ import '../../../models/transaction/transaction_model.dart';
 class EditPage extends StatefulWidget {
   final TransactionModel transaction;
   
-
  const EditPage({required this.transaction, Key? key}) : super(key: key);
 
   @override
@@ -23,12 +19,9 @@ class _EditPageState extends State<EditPage> {
   final _amountTextEditingController = TextEditingController();
   final _purposeTextEditingController = TextEditingController();
   final _dateTextEditingController = TextEditingController();
-  
   late DateTime _selectedDate;
   CategoryType _selectedCategoryType = CategoryType.expense;
-   final _formKey = GlobalKey<FormState>(); 
-
-  
+  final _formKey = GlobalKey<FormState>(); 
   var _selectedCategoryId;
   bool _secureText = true;
   
@@ -36,187 +29,192 @@ class _EditPageState extends State<EditPage> {
   void initState() {
     _amountTextEditingController.text = widget.transaction.amount.toString();
     _purposeTextEditingController.text = widget.transaction.purpose;
-     _selectedDate = widget.transaction.date;
-     _selectedCategoryType = widget.transaction.type;
-     
-
+    _selectedDate = widget.transaction.date;
+    _selectedCategoryType = widget.transaction.type;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    
-    
     return Scaffold(
       appBar: AppBar(
         backgroundColor:  const Color.fromARGB(255, 12, 46, 62),
         title:const Text('Edit Transaction'),
+        leading: IconButton(onPressed: (){
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
+        }, icon:const Icon(Icons.arrow_back)),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-           key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFormField(
-                controller: _purposeTextEditingController,
-                decoration:const InputDecoration(labelText: 'Purpose',
-                border: OutlineInputBorder(),
-                ),
-                 validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a purpose';
-                      }
-                      return null;
-                    },
-              ),
-             const SizedBox(height: 10,),
-              TextFormField(
-                controller: _amountTextEditingController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Amount',
-                border:const OutlineInputBorder(),
-                 suffixIcon: IconButton(onPressed: (){
-                        setState(() {
-                          _secureText = !_secureText;
-                        });
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+             key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextFormField(
+                  controller: _purposeTextEditingController,
+                  decoration:const InputDecoration(labelText: 'Purpose',
+                  border: OutlineInputBorder(),
+                  ),
+                   validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a purpose';
+                        }
+                        return null;
                       },
-                       icon:const Icon( Icons.remove_red_eye,)),
                 ),
-                 obscureText: _secureText,
-                  validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter an Amount';
-                      }
-                      if(double.tryParse(value) == null) {
-                        return 'Please enter a valid numeric amount';
+               const SizedBox(height: 10,),
+                TextFormField(
+                  controller: _amountTextEditingController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(labelText: 'Amount',
+                  border:const OutlineInputBorder(),
+                   suffixIcon: IconButton(onPressed: (){
+                          setState(() {
+                            _secureText = !_secureText;
+                          });
+                        },
+                         icon:const Icon( Icons.remove_red_eye,)),
+                  ),
+                   obscureText: _secureText,
+                    validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter an Amount';
+                        }
+                        if(double.tryParse(value) == null) {
+                          return 'Please enter a valid numeric amount';
+                        }
+                        return null;
+                      },
+                  
+                ),
+               const SizedBox(height: 10,),
+            //            TextButton.icon(onPressed: () async {
+            //   final selectedDate = await showDatePicker(
+            //     context: context,
+            //     initialDate: _selectedDate,
+            //     firstDate: DateTime.now().subtract(const Duration(days: 30)),
+            //     lastDate: DateTime.now(),
+            //   );
+            //   if (selectedDate != null) {
+            //     setState(() {
+            //       _selectedDate = selectedDate; // Update _selectedDate with the selected date
+            //     });
+            //   }
+            // },
+            //             icon:const Icon(Icons.date_range),
+            //              label:const Text('Select Date'),
+            //              ),
+                   TextFormField(
+                    controller: _dateTextEditingController,
+                    decoration:const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Select date',
+                     suffixIcon: Icon(Icons.date_range),
+                    ),
+                    readOnly: true,
+                    onTap: () async {
+                       final selectedDate = await showDatePicker(
+                context: context,
+                initialDate: _selectedDate,
+                firstDate: DateTime.now().subtract(const Duration(days: 30)),
+                lastDate: DateTime.now(),
+              );
+              if (selectedDate != null) {
+                setState(() {
+            _selectedDate = selectedDate; // Update _selectedDate with the selected date
+            _dateTextEditingController.text = _selectedDate.toString();
+                });
+              }      
+                    },
+                    validator: (value) {  
+                      if(_selectedDate == null){
+                        return 'Please select a date';
                       }
                       return null;
-                      
                     },
-                
-              ),
-             const SizedBox(height: 10,),
-          //            TextButton.icon(onPressed: () async {
-          //   final selectedDate = await showDatePicker(
-          //     context: context,
-          //     initialDate: _selectedDate,
-          //     firstDate: DateTime.now().subtract(const Duration(days: 30)),
-          //     lastDate: DateTime.now(),
-          //   );
-          //   if (selectedDate != null) {
-          //     setState(() {
-          //       _selectedDate = selectedDate; // Update _selectedDate with the selected date
-          //     });
-          //   }
-          // },
-          //             icon:const Icon(Icons.date_range),
-          //              label:const Text('Select Date'),
-          //              ),
-                 TextFormField(
-                  controller: _dateTextEditingController,
-                  decoration:const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Select date',
-                   suffixIcon: Icon(Icons.date_range),
-                  ),
-                  readOnly: true,
-                  onTap: () async {
-                     final selectedDate = await showDatePicker(
-              context: context,
-              initialDate: _selectedDate,
-              firstDate: DateTime.now().subtract(const Duration(days: 30)),
-              lastDate: DateTime.now(),
-            );
-            if (selectedDate != null) {
-              setState(() {
-          _selectedDate = selectedDate; // Update _selectedDate with the selected date
-          _dateTextEditingController.text = _selectedDate.toString();
-              });
-            }      
-                  },
-                  validator: (value) {
-                     
-                    if(_selectedDate == null){
-                      return 'Please select a date';
-                    }
-                    return null;
-                  },
-                  
-                 ),
-                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                   children: [
-                     Row(
-                       children: [
-                         Radio(
-                          value: CategoryType.income,
-                          groupValue: _selectedCategoryType,
-                           onChanged: (newValue){
-                            setState(() {
-                               _selectedCategoryType = CategoryType.income;
-          
-                            });
-                           },
-                         ),
-                        const Text('Income'),
-                       ],
-                     ),
-                     Row(
-                       children: [
-                         Radio(value: CategoryType.expense,
-                          groupValue: _selectedCategoryType,
-                           onChanged: (newValue){
-                            setState(() {
-                               _selectedCategoryType = CategoryType.expense;
-                            });
-                            
-                           },
-                         ),
-                        const Text('Expence'),
-                       ],
-                     ),
-                   ],
-                 ),
-                 DropdownButton(
-                  hint:const Text('Selected Category'),
-                  icon:const Icon(Icons.menu,color: Color.fromARGB(255, 12, 46, 62),),
-                  value:_selectedCategoryId ,
-                  items:( _selectedCategoryType == CategoryType.income
-                 ? CategoryDB.instance.incomeCategoryListListener.value
-                 : CategoryDB.instance.expenseCategoryListListener.value).map((e) {
-                    return DropdownMenuItem(
-                      value: e.id,
-                      child:Text(e.name),
-                       );
-                  }).toList(),
-                  onChanged: (selectedValue){
-                   // print(selectedValue);
-                   setState(() {
-                    _selectedCategoryId = selectedValue;
-                    
-                   });
-                  },
-                  ),
-             const SizedBox(height: 16),
-              ElevatedButton(
-                
-                onPressed: () { if (_formKey.currentState!.validate()){
+                   ),
+                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                     children: [
+                       Row(
+                         children: [
+                           Radio(
+                            value: CategoryType.income,
+                            groupValue: _selectedCategoryType,
+                             onChanged: (newValue){
+                              setState(() {
+                                 _selectedCategoryType = CategoryType.income;
+                              });
+                             },
+                           ),
+                          const Text('Income'),
+                         ],
+                       ),
+                       Row(
+                         children: [
+                           Radio(value: CategoryType.expense,
+                            groupValue: _selectedCategoryType,
+                             onChanged: (newValue){
+                              setState(() {
+                                 _selectedCategoryType = CategoryType.expense;
+                              });
+                             },
+                           ),
+                          const Text('Expence'),
+                         ],
+                       ),
+                     ],
+                   ),
+                  //  DropdownButtonFormField<String>(
+                  //   decoration:const InputDecoration(
+                  //     hintText:'Select phone number',
+                  //   icon:Icon(Icons.menu,color: Color.fromARGB(255, 12, 46, 62),),
+                  //   ),
+                  //   // hint:const Text('Selected Category'),
+                  //   // icon:const Icon(Icons.menu,color: Color.fromARGB(255, 12, 46, 62),),
+                  //   value:_selectedCategoryId ,
+                  //   items:( _selectedCategoryType == CategoryType.income
+                  //  ? CategoryDB.instance.incomeCategoryListListener.value
+                  //  : CategoryDB.instance.expenseCategoryListListener.value).map((e) {
+                  //     return DropdownMenuItem<String>(
+                  //       value: e.id,
+                  //       child:Text(e.name),
+                  //        );
+                  //   }).toList(),
+                  //   onChanged: (selectedValue){
+                  //    // print(selectedValue);
+                  //    setState(() {
+                  //     _selectedCategoryId = selectedValue;
                       
-                    TransactionDB.instance.refresh();
-                    updateTransaction();
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>HomeScreen()));
-                    }
- 
-                 //  Navigator.pop(context); // to Go back after updating
-                },
-                style:ElevatedButton.styleFrom(
-                  primary:Color.fromARGB(255, 12, 46, 62)
+                  //    });
+                  //   },
+                  //   validator: (value) {
+                  //     if(_selectedCategoryId == null){
+                  //       return 'Please select a phone number';
+                  //     }
+                  //     return null;
+                  //   },
+                  //   ),
+               const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                     if (_formKey.currentState!.validate()) {
+                      TransactionDB.instance.refresh();
+                      updateTransaction();
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>HomeScreen()));
+                      }
+       
+                   //  Navigator.pop(context); // to Go back after updating
+                  },
+                  style:ElevatedButton.styleFrom(
+                    primary:Color.fromARGB(255, 12, 46, 62)
+                  ),
+                  child:const Text('Update Transaction'),
                 ),
-                child:const Text('Update Transaction'),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -241,5 +239,13 @@ class _EditPageState extends State<EditPage> {
     TransactionDB.instance.updateTransaction(widget.transaction);
   }
 }
+
+
+
+
+
+
+
+
 
 

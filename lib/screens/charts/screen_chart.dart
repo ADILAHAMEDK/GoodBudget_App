@@ -23,7 +23,6 @@ class ChartState extends State<Chart> {
   String _selectedValue = 'Day';
   List<TransactionModel> transactions = [];
   
-
   @override
   void initState() {
     super.initState();
@@ -112,7 +111,7 @@ List<PieChartSectionData> showingSections() {
         color: colors[i],
         value: values[i],
         title: '${values[i].toStringAsFixed(1)}%', // Limit to one decimal place
-        radius: radius,
+        radius: 150,
         titleStyle: TextStyle(
           fontSize: fontSize,
           fontWeight: FontWeight.bold,
@@ -134,14 +133,15 @@ List<PieChartSectionData> showingSections() {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: const Color.fromARGB(225, 27, 57, 61),
+        backgroundColor:  const Color.fromARGB(255, 12, 46, 62),
         title: const Center(child: Text('Charts')),
       ),
-      body: Card(
-        color: const Color.fromARGB(255, 35, 71, 73),
-        child: AspectRatio(
-          aspectRatio: 1.1,
+      body: Center(
+        child: Card(
+          color:Colors.white10,
+           //const Color.fromARGB(255, 35, 71, 73),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -152,17 +152,18 @@ List<PieChartSectionData> showingSections() {
                       height: 2,
                       color: const Color.fromARGB(255, 255, 255, 255),
                     ),
-                    dropdownColor: const Color.fromARGB(255, 0, 0, 0),
+                    dropdownColor:Colors.white,
+                    // Color.fromARGB(255, 0, 0, 0),
                     focusColor: Colors.white,
                     alignment: Alignment.bottomCenter,
                     padding: const EdgeInsetsDirectional.all(3),
-                    icon:const Icon(
+                    icon: Icon(
                       Icons.arrow_drop_down,
                       color: Colors.black,
                     ),
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(20),
                     value: _selectedValue,
-                    style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                    style: const TextStyle(color: Colors.white),
                     items: <String>['Day', 'Week', 'Month']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
@@ -171,7 +172,8 @@ List<PieChartSectionData> showingSections() {
                           value,
                           style: const TextStyle(
                             fontSize: 15,
-                            color: Color.fromARGB(255, 255, 255, 255),
+                            color:Colors.black,
+                            // Color.fromARGB(255, 255, 255, 255),
                             fontFamily: AutofillHints.username,
                           ),
                         ),
@@ -188,7 +190,7 @@ List<PieChartSectionData> showingSections() {
                 ],
               ),
               AspectRatio(
-                aspectRatio: 1.8,
+                aspectRatio: 1.0,
                 child: PieChart(
                   PieChartData(
                     pieTouchData: PieTouchData(

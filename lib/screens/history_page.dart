@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
@@ -7,12 +6,9 @@ import 'package:money_manager/db_function/transaction/transaction_db.dart';
 import 'package:money_manager/models/category/category_model.dart';
 import 'package:money_manager/models/transaction/transaction_model.dart';
 import 'package:money_manager/screens/category/transaction/edit.dart';
-import 'package:money_manager/screens/history_page.dart';
-import 'package:money_manager/screens/search_page.dart';
 
 class HistoryPage extends StatelessWidget {
   
-
   const HistoryPage({super.key, required this.allTransactions});
 
    final List<TransactionModel> allTransactions;
@@ -54,8 +50,6 @@ double calculateTotalBalance(double totalIncome, double totalExpenses) {
       ),
       body: Column(
         children: [
-          
-         
             Expanded(
             child: Padding(
               padding: const EdgeInsets.all(0.0),
@@ -101,12 +95,12 @@ double calculateTotalBalance(double totalIncome, double totalExpenses) {
                               child: ListTile(
                                 leading: CircleAvatar(
                                   radius: 20,
+         backgroundColor: _value.type == CategoryType.income
+         ? const Color.fromARGB(255, 255, 255, 255)
+         : const Color.fromARGB(255, 255, 255, 255),
                                    child: _value.type == CategoryType.income
          ?  const Icon(Icons.arrow_circle_up,color: Colors.green,size: 30,)
          : const Icon(Icons.arrow_circle_down_outlined,color: Colors.red,size: 30,),
-         backgroundColor: _value.type == CategoryType.income
-         ? const Color.fromARGB(255, 255, 255, 255)
-         : const Color.fromARGB(255, 250, 248, 248),
 
                                   // radius: 50,
                                   // child:Text(parseDate(_value.date),

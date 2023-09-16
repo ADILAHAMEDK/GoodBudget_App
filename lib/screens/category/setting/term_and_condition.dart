@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:money_manager/screens/category/setting/screen_setting.dart';
 
 class TermsAndConditions extends StatelessWidget {
   const TermsAndConditions({super.key});
@@ -10,9 +9,9 @@ class TermsAndConditions extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Terms And Conditions'),
         backgroundColor: const Color.fromARGB(255, 12, 46, 62),
-        leading:  IconButton(onPressed: (){
-           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const ScreenSettings()));
-        }, icon:const Icon(Icons.arrow_back))
+        // leading:  IconButton(onPressed: (){
+        //    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const ScreenSettings()));
+        // }, icon:const Icon(Icons.arrow_back))
       ),
       body:const SingleChildScrollView(
         child: Padding(padding: EdgeInsets.all(10),

@@ -20,12 +20,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.red,
           unselectedItemColor: const Color.fromARGB(255, 12, 46, 62),
-
-
         currentIndex: updatedIndex,
         onTap: (newIndex) {
           HomeScreen.selectedIndexNotifier.value = newIndex;
-          
         },
         items: const [
         BottomNavigationBarItem(

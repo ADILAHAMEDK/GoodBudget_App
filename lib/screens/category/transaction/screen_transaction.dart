@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
@@ -68,7 +67,7 @@ double calculateTotalBalance(double totalIncome, double totalExpenses) {
                       ),
                   ),
                  const SizedBox(
-                    width: 25,
+                    width: 19,
                   ),
                  const Text('Money Manager',
                   style: TextStyle(
@@ -79,12 +78,7 @@ double calculateTotalBalance(double totalIncome, double totalExpenses) {
                   ),
                 ],
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0,
-                  ),
-                  color: Colors.white70,
-                ),
+              Expanded(
                 child: Padding(
                   padding:const EdgeInsets.all(12.0),
                   child: IconButton(onPressed: (){
@@ -237,9 +231,6 @@ double calculateTotalBalance(double totalIncome, double totalExpenses) {
           ),
            ],
          ),
-                      
-                      
-                      
                      Expanded(
                          child: ListView.separated(
                                     padding:const EdgeInsets.all(10),
@@ -283,7 +274,7 @@ double calculateTotalBalance(double totalIncome, double totalExpenses) {
          : const Icon(Icons.arrow_circle_down_outlined,color: Colors.red,size: 30,),
          backgroundColor: _value.type == CategoryType.income
          ? const Color.fromARGB(255, 255, 255, 255)
-         : const Color.fromARGB(255, 250, 248, 248),
+         : const Color.fromARGB(255, 255, 255, 255),
                                   // if()if
                                   
                                   // radius: 50,
@@ -336,8 +327,8 @@ double calculateTotalBalance(double totalIncome, double totalExpenses) {
                                     return //const SizedBox(height: 10, );
                                      const Divider(thickness: 1,);
                                    },
-                                   itemCount: newList.length <= 4 ? newList.length : 5),
-                                    
+                                   itemCount: newList.length <= 4 ? newList.length : 5,
+                                   ),   
                        ),
                     ]
                   );
@@ -345,12 +336,8 @@ double calculateTotalBalance(double totalIncome, double totalExpenses) {
                  ),
             ),
           ),
-          
         ]
           ),
-          
-        
-          
       );
   }
 
@@ -360,6 +347,5 @@ double calculateTotalBalance(double totalIncome, double totalExpenses) {
     return '${_splitedDate.last}\n${_splitedDate.first}';
     //'${date.day}\n${date.month}';
   }
-
 }
 

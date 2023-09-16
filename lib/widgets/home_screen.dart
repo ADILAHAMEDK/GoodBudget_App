@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:money_manager/db_function/transaction/transaction_db.dart';
 import 'package:money_manager/screens/category/categoryy/popup.dart';
 import 'package:money_manager/screens/category/categoryy/screen_category.dart';
-import 'package:money_manager/db_function/category/category_db.dart';
-import 'package:money_manager/models/category/category_model.dart';
 import 'package:money_manager/screens/category/setting/screen_setting.dart';
 import 'package:money_manager/screens/category/transaction/add_transaction.dart';
 import 'package:money_manager/screens/category/transaction/screen_transaction.dart';
@@ -31,9 +28,7 @@ class HomeScreen extends StatelessWidget {
       // appBar: AppBar(
       //   title:const Text('Money Manager'),
       //   centerTitle: true,
-      // ),
-
-          
+      // ),   
       bottomNavigationBar:const BottomNavBar(),
       body: SafeArea(
         

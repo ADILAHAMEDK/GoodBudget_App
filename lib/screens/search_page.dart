@@ -13,12 +13,13 @@ class ScreenSearchPage extends StatefulWidget {
 
 class _ScreenSearchPageState extends State<ScreenSearchPage> {
   String searchQuery = '';
-   DateTime? selectedDate;
+  ////////?????????????????????
+  DateTime? selectedDate;
  // search 
 List<TransactionModel> filterTransactions(String searchQuery, DateTime? selectedDate) {
   return TransactionDB.instance.transactionListNotifier.value.where((transaction) {
     final bool matchesSearchQuery = transaction.purpose.toLowerCase().contains(searchQuery.toLowerCase()) ||
-        transaction.amount.toStringAsFixed(2).contains(searchQuery.toLowerCase());
+     transaction.amount.toStringAsFixed(2).contains(searchQuery.toLowerCase());
     final bool matchesSelectedDate = selectedDate == null || transaction.date == selectedDate;
     return matchesSearchQuery && matchesSelectedDate;
   }).toList();
@@ -81,9 +82,9 @@ List<TransactionModel> filterTransactions(String searchQuery, DateTime? selected
               // ),
               TextFormField(
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border:const OutlineInputBorder(),
                   labelText: selectedDate == null ? 'Select date' : DateFormat.yMd().format(selectedDate!),
-                 suffixIcon: Icon(Icons.date_range),
+                 suffixIcon:const Icon(Icons.date_range),
                 ),
                 readOnly: true,
                 onTap: () async{
@@ -101,7 +102,6 @@ List<TransactionModel> filterTransactions(String searchQuery, DateTime? selected
                       updateFilteredTransactions();
                     });
                   }
-                
                 },
               ),
               const SizedBox(height: 10),
@@ -143,6 +143,5 @@ List<TransactionModel> filterTransactions(String searchQuery, DateTime? selected
       ),
     );
   }
-  
   void deleteTransactions(String s) {}
 }

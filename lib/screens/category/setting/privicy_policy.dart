@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:money_manager/screens/category/setting/screen_setting.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
   const PrivacyPolicyPage({super.key});
@@ -10,9 +9,9 @@ class PrivacyPolicyPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 12, 46, 62),
         title:const Text('Privacy Policy'),
-        leading: IconButton(onPressed: (){
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const ScreenSettings()));
-        }, icon:const Icon(Icons.arrow_back)),
+      // leading: IconButton(onPressed: (){
+      //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ScreenSettings()));
+      //   }, icon: const Icon(Icons.arrow_back)),
       ),
       body:const SingleChildScrollView(
         child: Padding(padding:EdgeInsets.all(10),
@@ -70,7 +69,8 @@ We may update this Privacy Policy to reflect changes in our practices or for oth
 
 9. Contact Us
 
-If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at [contact@email.com]."""),
+If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at [contact@email.com].""",
+),
         
         ),
       ),

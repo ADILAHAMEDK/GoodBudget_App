@@ -4,7 +4,6 @@ import 'package:money_manager/screens/category/setting/about_page.dart';
 import 'package:money_manager/screens/category/setting/privicy_policy.dart';
 import 'package:money_manager/screens/category/setting/reset_page.dart';
 import 'package:money_manager/screens/category/setting/term_and_condition.dart';
-import 'package:money_manager/widgets/home_screen.dart';
 
 class ScreenSettings extends StatelessWidget {
   const ScreenSettings({super.key});
@@ -15,15 +14,8 @@ class ScreenSettings extends StatelessWidget {
       appBar: AppBar(
         title:const Text('App Settings'),
         backgroundColor:const Color.fromARGB(255, 12, 46, 62),
-        leading: IconButton(onPressed: (){
-           Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
-        },
-         icon: const Icon(Icons.arrow_back) ),
-
-        
       ),
       body: ListView(
-        
         children:<Widget> [
           Container(
             margin:const  EdgeInsets.only(bottom: 20),
@@ -66,7 +58,7 @@ class ScreenSettings extends StatelessWidget {
               ),
               leading:const Icon(Icons.privacy_tip_sharp,size: 35,color:Colors.blue ,),
               onTap: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const PrivacyPolicyPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const PrivacyPolicyPage()));
               },
             ),
           ),
@@ -83,9 +75,7 @@ class ScreenSettings extends StatelessWidget {
               size: 35,
               ),
               onTap: () {
-         
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const TermsAndConditions()));
-                
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const TermsAndConditions()));
               },
             ),
          ),
@@ -109,7 +99,6 @@ class ScreenSettings extends StatelessWidget {
                     actions: <Widget>[
                       TextButton(onPressed: (){
                         Navigator.of(context).pop();
-                        
                       },
                        child:const Text('Cancel',style: TextStyle(color: Colors.red),),
                        ),
@@ -122,14 +111,11 @@ class ScreenSettings extends StatelessWidget {
                   );
                  }
                   );
-          
-                
               },
             ),
           )
         ],
       ),
-      
     );
   }
 }

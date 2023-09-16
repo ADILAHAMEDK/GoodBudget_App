@@ -17,11 +17,8 @@ Future<void> showCategoryAddPopup(BuildContext context) async {
         child: Container(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            
-            
             child: SimpleDialog(
-              //backgroundColor: const Color.fromARGB(255, 12, 46, 62),
-              title: const Text('Add Category'),
+              title: const Text('Add phone number'),
               children: [
                 Form(
                   key: _formKey,
@@ -31,14 +28,15 @@ Future<void> showCategoryAddPopup(BuildContext context) async {
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
                           controller: _nameEditingController,
+                          keyboardType: TextInputType.number,
                           inputFormatters: [LengthLimitingTextInputFormatter(10)],
                           decoration: const InputDecoration(
-                            hintText: 'Category Name',
+                            hintText: 'phone number',
                             border: OutlineInputBorder(),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter a category name';
+                              return 'Please enter a category phone number';
                             }
                             return null; // Validation passed
                           },
@@ -70,7 +68,10 @@ Future<void> showCategoryAddPopup(BuildContext context) async {
                               Navigator.of(ctx).pop();
                             }
                           },
-                          child: const Text('Add'),
+                          child:const SizedBox(
+                            width: 100,
+                            child:  Text('Add',textAlign: TextAlign.center,),
+                            ),
                         ),
                       ),
                     ],

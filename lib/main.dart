@@ -8,8 +8,8 @@ import 'package:money_manager/screens/category/transaction/add_transaction.dart'
 import 'package:money_manager/widgets/home_screen.dart';
 
 Future<void> main() async{
-  final obj1= CategoryDB();
-  final obj2 = CategoryDB();
+  //final obj1= CategoryDB();
+  //final obj2 = CategoryDB();
 
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
@@ -20,10 +20,12 @@ Future<void> main() async{
 
   if(!Hive.isAdapterRegistered(CategoryModelAdapter().typeId)){
     Hive.registerAdapter(CategoryModelAdapter());
+
   }
 
   if(!Hive.isAdapterRegistered(TransactionModelAdapter().typeId)){
     Hive.registerAdapter(TransactionModelAdapter());
+    
   }
    await Hive.openBox<TransactionModel>('transactionsBox');
   runApp(const MyApp());
@@ -38,8 +40,7 @@ class MyApp extends StatelessWidget {
       title: 'Money Manager',
       home: HomeScreen(),
       routes: {
-        AddTransactionPage.routeName:(ctx)=>  AddTransactionPage(),
-
+        AddTransactionPage.routeName:(ctx)=> const AddTransactionPage(),
       },
     );
   }

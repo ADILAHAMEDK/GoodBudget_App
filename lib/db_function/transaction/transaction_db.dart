@@ -19,8 +19,7 @@ class TransactionDB implements TransactionDbFunctions {
   factory TransactionDB() {
     return instance;
   }
-
- 
+  
   final ValueNotifier<List<TransactionModel>> transactionListNotifier =
       ValueNotifier<List<TransactionModel>>([]); // Initialize with an empty list
 
@@ -97,7 +96,5 @@ class TransactionDB implements TransactionDbFunctions {
       return transaction.date.isAfter(startOfMonth) && transaction.date.isBefore(endOfMonth);
     }).toList();
   }
-
-  
 }
 

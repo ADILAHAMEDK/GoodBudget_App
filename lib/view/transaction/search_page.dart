@@ -15,20 +15,28 @@ class _ScreenSearchPageState extends State<ScreenSearchPage> {
   String searchQuery = '';
   ////////?????????????????????
   DateTime? selectedDate;
- // search 
-List<TransactionModel> filterTransactions(String searchQuery, DateTime? selectedDate) {
-  return TransactionDB.instance.transactionListNotifier.value.where((transaction) {
-    final bool matchesSearchQuery = transaction.purpose.toLowerCase().contains(searchQuery.toLowerCase()) ||
-     transaction.amount.toStringAsFixed(2).contains(searchQuery.toLowerCase());
-    final bool matchesSelectedDate = selectedDate == null || transaction.date == selectedDate;
-    return matchesSearchQuery && matchesSelectedDate;
-  }).toList();
-}
+  // search
+  List<TransactionModel> filterTransactions(
+      String searchQuery, DateTime? selectedDate) {
+    return TransactionDB.instance.transactionListNotifier.value
+        .where((transaction) {
+      final bool matchesSearchQuery = transaction.purpose
+              .toLowerCase()
+              .contains(searchQuery.toLowerCase()) ||
+          transaction.amount
+              .toStringAsFixed(2)
+              .contains(searchQuery.toLowerCase());
+      final bool matchesSelectedDate =
+          selectedDate == null || transaction.date == selectedDate;
+      return matchesSearchQuery && matchesSelectedDate;
+    }).toList();
+  }
+
   List<TransactionModel> filteredTransactions = [];
 
   void updateFilteredTransactions() {
     setState(() {
-       filteredTransactions = filterTransactions(searchQuery, selectedDate);
+      filteredTransactions = filterTransactions(searchQuery, selectedDate);
     });
   }
 
@@ -37,19 +45,22 @@ List<TransactionModel> filterTransactions(String searchQuery, DateTime? selected
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor:  const Color.fromARGB(255, 12, 46, 62),
-          leading: IconButton(onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
-          }, icon:const Icon(Icons.arrow_back)),
+          backgroundColor: const Color.fromARGB(255, 12, 46, 62),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()));
+              },
+              icon: const Icon(Icons.arrow_back)),
           title: const Text('Search Transactions'),
         ),
         body: Padding(
-          padding:const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
               TextFormField(
                 keyboardType: TextInputType.text,
-                decoration:const InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Search',
                 ),
@@ -60,35 +71,18 @@ List<TransactionModel> filterTransactions(String searchQuery, DateTime? selected
                   });
                 },
               ),
-                      const SizedBox(height: 10),
-              // ElevatedButton(
-              //   onPressed: () async {
-              //     final selectedDateTemp = await showDatePicker(
-              //       context: context,
-              //       initialDate: selectedDate ?? DateTime.now(),
-              //       firstDate: DateTime(2020),
-              //       lastDate: DateTime.now(),
-              //     );
-              //     if (selectedDateTemp == null) {
-              //       return;
-              //     } else {
-              //       setState(() {
-              //         selectedDate = selectedDateTemp;
-              //         updateFilteredTransactions();
-              //       });
-              //     }
-              //   },
-              //   child: Text(selectedDate == null ? 'Select Date' : 'Selected Date: ${DateFormat.yMd().format(selectedDate!)}'),
-              // ),
+              const SizedBox(height: 10),
               TextFormField(
                 decoration: InputDecoration(
-                  border:const OutlineInputBorder(),
-                  labelText: selectedDate == null ? 'Select date' : DateFormat.yMd().format(selectedDate!),
-                 suffixIcon:const Icon(Icons.date_range),
+                  border: const OutlineInputBorder(),
+                  labelText: selectedDate == null
+                      ? 'Select date'
+                      : DateFormat.yMd().format(selectedDate!),
+                  suffixIcon: const Icon(Icons.date_range),
                 ),
                 readOnly: true,
-                onTap: () async{
-                   final selectedDateTemp = await showDatePicker(
+                onTap: () async {
+                  final selectedDateTemp = await showDatePicker(
                     context: context,
                     initialDate: selectedDate ?? DateTime.now(),
                     firstDate: DateTime(2020),
@@ -118,19 +112,34 @@ List<TransactionModel> filterTransactions(String searchQuery, DateTime? selected
                       background: Container(
                         color: Colors.grey,
                         alignment: Alignment.centerRight,
-                        child:const Icon(Icons.delete,color: Colors.white,),
+                        child: const Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
                       ),
                       child: Card(
                         child: ListTile(
-                          title: Text('Amount: ${transaction.amount.toStringAsFixed(2)}', style:const TextStyle(
-                            fontSize: 16,fontWeight: FontWeight.w500,
-                            color:Color.fromARGB(255, 12, 46, 62)),),
-                           subtitle:Text(DateFormat.yMd().format(transaction.date),style:const TextStyle(
-                            fontSize: 15,fontWeight: FontWeight.w500,color:  Colors.red),),
-                           trailing:Text(transaction.purpose,style:const TextStyle(
-                            fontSize: 18,fontWeight: FontWeight.w500,
-                            color:  Color.fromARGB(255, 12, 46, 62)),),               
-                          // Add more details as needed
+                          title: Text(
+                            'Amount: ${transaction.amount.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Color.fromARGB(255, 12, 46, 62)),
+                          ),
+                          subtitle: Text(
+                            DateFormat.yMd().format(transaction.date),
+                            style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.red),
+                          ),
+                          trailing: Text(
+                            transaction.purpose,
+                            style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: Color.fromARGB(255, 12, 46, 62)),
+                          ),
                         ),
                       ),
                     );
@@ -143,5 +152,6 @@ List<TransactionModel> filterTransactions(String searchQuery, DateTime? selected
       ),
     );
   }
+
   void deleteTransactions(String s) {}
 }

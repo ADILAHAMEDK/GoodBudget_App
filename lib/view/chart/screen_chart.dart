@@ -22,80 +22,85 @@ class ChartState extends State<Chart> {
   int touchedIndex = 0;
   String _selectedValue = 'Day';
   List<TransactionModel> transactions = [];
-  
+
   @override
   void initState() {
     super.initState();
     transactions = TransactionDB.instance.transactions!;
-    updateTransactions(_selectedValue); 
+    updateTransactions(_selectedValue);
   }
 
   void updateTransactions(String selectedValue) {
     print("Selected Value: $selectedValue");
     setState(() {
       _selectedValue = selectedValue;
-       // Define startDate and endDate for the week filter
-    DateTime now = DateTime.now();
-    DateTime startDate = DateTime.now(); // Default to the current date
-    DateTime endDate = DateTime.now();   // Default to the current date
+      // Define startDate and endDate for the week filter
+      DateTime now = DateTime.now();
+      DateTime startDate = DateTime.now(); // Default to the current date
+      DateTime endDate = DateTime.now(); // Default to the current date
 
-   
-    // Calculate the start and end dates based on the current date
-    if (_selectedValue == 'Week') {
-      int todayWeekday = startDate.weekday;
-      startDate = startDate.subtract(Duration(days: todayWeekday - 1)); // Start of the current week (Sunday)
-      endDate = startDate.add(Duration(days: 7 - todayWeekday)); // End of the current week (Saturday)
-    }
+      // Calculate the start and end dates based on the current date
+      if (_selectedValue == 'Week') {
+        int todayWeekday = startDate.weekday;
+        startDate = startDate.subtract(Duration(
+            days: todayWeekday - 1)); // Start of the current week (Sunday)
+        endDate = startDate.add(Duration(
+            days: 7 - todayWeekday)); // End of the current week (Saturday)
+      }
 
       // Filter transactions based on the selected value (Day, Week, Month)
       if (_selectedValue == 'Day') {
         transactions = TransactionDB.instance.getTransactionsByDay();
       } else if (_selectedValue == 'Week') {
-        transactions = TransactionDB.instance.getTransactionsByWeek(startDate,endDate);
+        transactions =
+            TransactionDB.instance.getTransactionsByWeek(startDate, endDate);
       } else if (_selectedValue == 'Month') {
         transactions = TransactionDB.instance.getTransactionsByMonth();
       }
-       print("Number of Transactions: ${transactions.length}");
+      print("Number of Transactions: ${transactions.length}");
     });
   }
 
-List<PieChartSectionData> showingSections() {
-  double totalIncome = 0;
-  double totalExpenses = 0;
+  List<PieChartSectionData> showingSections() {
+    double totalIncome = 0;
+    double totalExpenses = 0;
 
-  // Filter transactions based on the selected time frame (_selectedValue)
-  final now = DateTime.now();
-  final startOfWeek = DateTime(now.year, now.month, now.day - now.weekday);
-  final endOfWeek = DateTime(now.year, now.month, now.day + (6 - now.weekday));
-  final filteredTransactions = transactions.where((transaction) {
-    if (_selectedValue == 'Day') {
-      final today = DateTime(now.year, now.month, now.day);
-      return transaction.date.isAtSameMomentAs(today);
-    } else if (_selectedValue == 'Week') {
-      return transaction.date.isAfter(startOfWeek) &&
-          transaction.date.isBefore(endOfWeek);
-    } else if (_selectedValue == 'Month') {
-      final startOfMonth = DateTime(now.year, now.month, 1);
-      final endOfMonth = DateTime(now.year, now.month + 1, 0);
-      return transaction.date.isAfter(startOfMonth) &&
-          transaction.date.isBefore(endOfMonth);
-    }
-    return false;
-  }).toList();
+    // Filter transactions based on the selected time frame (_selectedValue)
+    final now = DateTime.now();
+    final startOfWeek = DateTime(now.year, now.month, now.day - now.weekday);
+    final endOfWeek =
+        DateTime(now.year, now.month, now.day + (6 - now.weekday));
+    final filteredTransactions = transactions.where((transaction) {
+      if (_selectedValue == 'Day') {
+        final today = DateTime(now.year, now.month, now.day);
+        return transaction.date.isAtSameMomentAs(today);
+      } else if (_selectedValue == 'Week') {
+        return transaction.date.isAfter(startOfWeek) &&
+            transaction.date.isBefore(endOfWeek);
+      } else if (_selectedValue == 'Month') {
+        final startOfMonth = DateTime(now.year, now.month, 1);
+        final endOfMonth = DateTime(now.year, now.month + 1, 0);
+        return transaction.date.isAfter(startOfMonth) &&
+            transaction.date.isBefore(endOfMonth);
+      }
+      return false;
+    }).toList();
 
-  for (var transaction in filteredTransactions) {
-    if (transaction.type == CategoryType.income) {
-      totalIncome += transaction.amount;
-    } else if (transaction.type == CategoryType.expense) {
-      totalExpenses += transaction.amount;
+    for (var transaction in filteredTransactions) {
+      if (transaction.type == CategoryType.income) {
+        totalIncome += transaction.amount;
+      } else if (transaction.type == CategoryType.expense) {
+        totalExpenses += transaction.amount;
+      }
     }
+
+    double completedPercentage =
+        totalIncome / (totalIncome + totalExpenses) * 100;
+    double remainingPercentage = 100 - completedPercentage;
+
+    return generateChartData(completedPercentage, remainingPercentage);
   }
 
-  double completedPercentage = totalIncome / (totalIncome + totalExpenses) * 100;
-  double remainingPercentage = 100 - completedPercentage;
-
-  return generateChartData(completedPercentage, remainingPercentage);
-}
   List<PieChartSectionData> generateChartData(double value1, double value2) {
     final List<Color> colors = [Colors.green[900]!, Colors.red[400]!];
     final List<double> values = [value1, value2];
@@ -133,13 +138,13 @@ List<PieChartSectionData> showingSections() {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor:  const Color.fromARGB(255, 12, 46, 62),
+        backgroundColor: const Color.fromARGB(255, 12, 46, 62),
         title: const Center(child: Text('Charts')),
       ),
       body: Center(
         child: Card(
-          color:Colors.white10,
-           //const Color.fromARGB(255, 35, 71, 73),
+          color: Colors.white10,
+          //const Color.fromARGB(255, 35, 71, 73),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -152,7 +157,7 @@ List<PieChartSectionData> showingSections() {
                       height: 2,
                       color: const Color.fromARGB(255, 255, 255, 255),
                     ),
-                    dropdownColor:Colors.white,
+                    dropdownColor: Colors.white,
                     // Color.fromARGB(255, 0, 0, 0),
                     focusColor: Colors.white,
                     alignment: Alignment.bottomCenter,
@@ -172,7 +177,7 @@ List<PieChartSectionData> showingSections() {
                           value,
                           style: const TextStyle(
                             fontSize: 15,
-                            color:Colors.black,
+                            color: Colors.black,
                             // Color.fromARGB(255, 255, 255, 255),
                             fontFamily: AutofillHints.username,
                           ),
@@ -202,8 +207,8 @@ List<PieChartSectionData> showingSections() {
                             touchedIndex = -1;
                             return;
                           }
-                          touchedIndex =
-                              pieTouchResponse.touchedSection!.touchedSectionIndex;
+                          touchedIndex = pieTouchResponse
+                              .touchedSection!.touchedSectionIndex;
                         });
                       },
                     ),
@@ -223,17 +228,3 @@ List<PieChartSectionData> showingSections() {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

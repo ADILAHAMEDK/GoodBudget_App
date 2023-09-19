@@ -5,9 +5,9 @@ import 'package:money_manager/db_function/category/category_db.dart';
 import 'package:money_manager/db_function/transaction/transaction_db.dart';
 import 'package:money_manager/models/category/category_model.dart';
 import 'package:money_manager/models/transaction/transaction_model.dart';
-import 'package:money_manager/screens/category/transaction/edit.dart';
-import 'package:money_manager/screens/history_page.dart';
-import 'package:money_manager/screens/search_page.dart';
+import 'package:money_manager/view/editTransactionScreen/editTransactionScreen.dart';
+import 'package:money_manager/view/transaction/history_page.dart';
+import 'package:money_manager/view/transaction/search_page.dart';
 
 class ScreenTransaction extends StatelessWidget {
 

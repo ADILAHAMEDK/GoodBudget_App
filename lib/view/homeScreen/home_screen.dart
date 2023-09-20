@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:money_manager/screens/category/categoryy/popup.dart';
-import 'package:money_manager/screens/category/categoryy/screen_category.dart';
-import 'package:money_manager/screens/category/setting/screen_setting.dart';
-import 'package:money_manager/screens/category/transaction/add_transaction.dart';
-import 'package:money_manager/screens/category/transaction/screen_transaction.dart';
-import 'package:money_manager/screens/charts/screen_chart.dart';
-import 'package:money_manager/widgets/bottom_navigation_bar.dart';
+
+import '../addTransactionScreen/add_transaction.dart';
+import '../bottomNavigationBar/bottom_navigation_bar.dart';
+import '../category/popup.dart';
+import '../category/screen_category.dart';
+import '../chart/screen_chart.dart';
+import '../settings/screen_setting.dart';
+import '../transaction/screen_transaction.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});

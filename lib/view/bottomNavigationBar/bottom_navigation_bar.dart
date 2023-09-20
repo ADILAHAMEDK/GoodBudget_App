@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_manager/widgets/home_screen.dart';
+import '../homeScreen/home_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});

@@ -5,7 +5,8 @@ import 'package:money_manager/db_function/category/category_db.dart';
 import 'package:money_manager/db_function/transaction/transaction_db.dart';
 import 'package:money_manager/models/category/category_model.dart';
 import 'package:money_manager/models/transaction/transaction_model.dart';
-import 'package:money_manager/screens/category/transaction/edit.dart';
+
+import '../editTransactionScreen/editTransactionScreen.dart';
 
 class HistoryPage extends StatelessWidget {
   

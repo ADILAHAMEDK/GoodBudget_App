@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:money_manager/controller/provider/addTransactionProvider.dart';
 import 'package:money_manager/db_function/category/category_db.dart';
 import 'package:money_manager/models/category/category_model.dart';
 import 'package:money_manager/models/transaction/transaction_model.dart';
-import 'package:money_manager/screens/category/transaction/add_transaction.dart';
-import 'package:money_manager/widgets/home_screen.dart';
+import 'package:money_manager/view/addTransactionScreen/add_transaction.dart';
+import 'package:money_manager/view/homeScreen/home_screen.dart';
+import 'package:provider/provider.dart';
+
 
 Future<void> main() async{
   //final obj1= CategoryDB();
@@ -35,13 +38,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Money Manager',
-      home: HomeScreen(),
-      routes: {
-        AddTransactionPage.routeName:(ctx)=> const AddTransactionPage(),
-      },
+    return  MultiProvider(
+      providers: [
+       ChangeNotifierProvider(create: (context) =>  AddTransactionProvider(),)
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Money Manager',
+        home: HomeScreen(),
+        routes: {
+          AddTransactionPage.routeName:(ctx)=> const AddTransactionPage(),
+        },
+      ),
     );
   }
 }

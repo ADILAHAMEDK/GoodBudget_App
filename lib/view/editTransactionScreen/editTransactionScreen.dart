@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_manager/db_function/transaction/transaction_db.dart';
 import 'package:money_manager/models/category/category_model.dart';
-import 'package:money_manager/widgets/home_screen.dart';
+import '../homeScreen/home_screen.dart';
 import '../../../models/transaction/transaction_model.dart';
 
 class EditPage extends StatefulWidget {

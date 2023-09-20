@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:money_manager/screens/category/setting/about_page.dart';
-import 'package:money_manager/screens/category/setting/privicy_policy.dart';
-import 'package:money_manager/screens/category/setting/reset_page.dart';
-import 'package:money_manager/screens/category/setting/term_and_condition.dart';
+import 'package:money_manager/view/settings/about_page.dart';
+import 'package:money_manager/view/settings/privicy_policy.dart';
+import 'package:money_manager/view/settings/reset_page.dart';
+import 'package:money_manager/view/settings/term_and_condition.dart';
+import '../homeScreen/home_screen.dart';
 
 class ScreenSettings extends StatelessWidget {
   const ScreenSettings({super.key});

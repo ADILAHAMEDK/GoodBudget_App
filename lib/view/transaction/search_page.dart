@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:money_manager/db_function/transaction/transaction_db.dart';
 import 'package:money_manager/models/transaction/transaction_model.dart';
-import 'package:money_manager/widgets/home_screen.dart';
+
+import '../homeScreen/home_screen.dart';
+
 
 class ScreenSearchPage extends StatefulWidget {
   const ScreenSearchPage({Key? key}) : super(key: key);

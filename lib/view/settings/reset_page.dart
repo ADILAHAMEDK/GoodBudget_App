@@ -14,7 +14,7 @@ Future<void> resetDB(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        backgroundColor:  const Color.fromARGB(255, 12, 46, 62),
+        backgroundColor: const Color.fromARGB(255, 12, 46, 62),
         title: const Text(
           "Confirm Reset",
           style: TextStyle(color: Colors.white),
@@ -25,7 +25,7 @@ Future<void> resetDB(
         ),
         actions: <Widget>[
           TextButton(
-            child:const Text(
+            child: const Text(
               "Cancel",
               style: TextStyle(color: Colors.red),
             ),
@@ -34,7 +34,7 @@ Future<void> resetDB(
             },
           ),
           TextButton(
-            child:const Text(
+            child: const Text(
               "Reset",
               style: TextStyle(color: Colors.red),
             ),
@@ -48,11 +48,11 @@ Future<void> resetDB(
   );
 
   if (confirmReset == true) {
-    const TRANSACTION_DB_NAME ='transaction_db';
+    const TRANSACTION_DB_NAME = 'transaction_db';
     const CATEGORY_DB_NAME = 'category-database';
     final videoDb = await Hive.openBox<TransactionModel>(TRANSACTION_DB_NAME);
     videoDb.clear();
-    final favoriteDb = await Hive.openBox<CategoryModel>(CATEGORY_DB_NAME );
+    final favoriteDb = await Hive.openBox<CategoryModel>(CATEGORY_DB_NAME);
     favoriteDb.clear();
     final chartDB = await Hive.openBox<CategoryType>('statistics');
     chartDB.clear();
@@ -61,6 +61,6 @@ Future<void> resetDB(
         context,
         MaterialPageRoute(
           builder: (context) => HomeScreen(),
- ));
-}
+        ));
+  }
 }

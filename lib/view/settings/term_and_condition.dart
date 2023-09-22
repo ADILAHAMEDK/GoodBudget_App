@@ -5,7 +5,7 @@ class TermsAndConditions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text('Terms And Conditions'),
         backgroundColor: const Color.fromARGB(255, 12, 46, 62),
@@ -13,9 +13,11 @@ class TermsAndConditions extends StatelessWidget {
         //    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const ScreenSettings()));
         // }, icon:const Icon(Icons.arrow_back))
       ),
-      body:const SingleChildScrollView(
-        child: Padding(padding: EdgeInsets.all(10),
-        child: Text("""[Your Company Name] Money Manager Service Terms and Conditions
+      body: const SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Text(
+              """[Your Company Name] Money Manager Service Terms and Conditions
 
 Effective Date: [Date]
 

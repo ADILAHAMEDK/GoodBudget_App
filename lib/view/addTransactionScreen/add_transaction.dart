@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:money_manager/controller/provider/addTransactionProvider.dart';
 import 'package:money_manager/db_function/category/category_db.dart';
 import 'package:money_manager/db_function/transaction/transaction_db.dart';
 import 'package:money_manager/models/category/category_model.dart';
 import 'package:money_manager/models/transaction/transaction_model.dart';
-import 'package:provider/provider.dart';
 
 class AddTransactionPage extends StatefulWidget {
   static const routeName = 'add transaction';
@@ -33,7 +31,6 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<AddTransactionProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Transaction'),
@@ -71,44 +68,35 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                     height: 10,
                   ),
                   // Amount
-                  Consumer<AddTransactionProvider>(
-                      builder: (context, secureTextProvider, _) {
-                    return TextFormField(
-                      controller: _amountTextEditingController,
-                      obscureText: secureTextProvider.isSecure,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          suffixIcon: IconButton(
-                              onPressed: () {
-
-                                 secureTextProvider.changeSecureText();
-                                // setState(() {
-                                //   _secureText = !_secureText;
-                                // });
-                              },
-                              icon: Icon(
-                               // Icons.remove_red_eye,
-                                secureTextProvider.isSecure
-                                    ? Icons.remove_red_eye
-                                    : Icons.remove_red_eye_outlined,
-                              )),
-                          hintText: 'Amount',
-                          hintStyle: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                          )),
-                      
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter an Amount';
-                        }
-                        if (double.tryParse(value) == null) {
-                          return 'Please enter a valid numeric amount';
-                        }
-                        return null;
-                      },
-                    );
-                  }),
+                  TextFormField(
+                    controller: _amountTextEditingController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _secureText = !_secureText;
+                              });
+                            },
+                            icon: const Icon(
+                              Icons.remove_red_eye,
+                            )),
+                        hintText: 'Amount',
+                        hintStyle: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                        )),
+                    obscureText: _secureText,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter an Amount';
+                      }
+                      if (double.tryParse(value) == null) {
+                        return 'Please enter a valid numeric amount';
+                      }
+                      return null;
+                    },
+                  ),
 
                   SizedBox(
                     height: 10,

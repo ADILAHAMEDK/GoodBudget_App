@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:money_manager/db_function/transaction/transaction_db.dart';
 import 'package:money_manager/models/transaction/transaction_model.dart';
-
+import 'package:provider/provider.dart';
+import '../../controller/provider/searchPageProvider.dart';
 import '../homeScreen/home_screen.dart';
-
 
 class ScreenSearchPage extends StatefulWidget {
   const ScreenSearchPage({Key? key}) : super(key: key);
@@ -58,97 +58,116 @@ class _ScreenSearchPageState extends State<ScreenSearchPage> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              TextFormField(
-                keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Search',
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    searchQuery = value;
-                    updateFilteredTransactions();
-                  });
-                },
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: selectedDate == null
-                      ? 'Select date'
-                      : DateFormat.yMd().format(selectedDate!),
-                  suffixIcon: const Icon(Icons.date_range),
-                ),
-                readOnly: true,
-                onTap: () async {
-                  final selectedDateTemp = await showDatePicker(
-                    context: context,
-                    initialDate: selectedDate ?? DateTime.now(),
-                    firstDate: DateTime(2020),
-                    lastDate: DateTime.now(),
-                  );
-                  if (selectedDateTemp == null) {
-                    return;
-                  } else {
-                    setState(() {
-                      selectedDate = selectedDateTemp;
+          child: ChangeNotifierProvider(
+            create: (context) => SearchPageProvider(),
+            child: Column(
+              children: [
+                Consumer<SearchPageProvider>(builder: (context, Provider, _) {
+                  return TextFormField(
+                    keyboardType: TextInputType.text,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Search',
+                    ),
+                    onChanged: (value) {
+                      Provider.setSearchQuery(value); // Update search query
                       updateFilteredTransactions();
-                    });
-                  }
-                },
-              ),
-              const SizedBox(height: 10),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: filteredTransactions.length,
-                  itemBuilder: (context, index) {
-                    final transaction = filteredTransactions[index];
-                    return Dismissible(
-                      key: Key(transaction.id!),
-                      onDismissed: (direction) {
-                        deleteTransactions(transaction.id!);
+
+                      // setState(() {
+                      //   searchQuery = value;
+                      //   updateFilteredTransactions();
+                      // });
+                    },
+                  );
+                }),
+                const SizedBox(height: 10),
+                Consumer<SearchPageProvider>(builder: (context, Provider, _) {
+                  return TextFormField(
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      labelText: Provider.selectedDate == null
+                          ? 'Select date'
+                          : DateFormat.yMd().format(Provider.selectedDate!),
+                      suffixIcon: const Icon(Icons.date_range),
+                    ),
+                    readOnly: true,
+                    onTap: () async {
+                      final selectedDateTemp = await showDatePicker(
+                        context: context,
+                        initialDate: Provider.selectedDate ?? DateTime.now(),
+                        firstDate: DateTime(2020),
+                        lastDate: DateTime.now(),
+                      );
+                      if (selectedDateTemp == null) {
+                        return;
+                      } else {
+                        Provider.setSelectedDate(
+                            selectedDateTemp); // Update selected date
+                        updateFilteredTransactions();
+                        // setState(() {
+                        //   selectedDate = selectedDateTemp;
+                        //   updateFilteredTransactions();
+                        // });
+                      }
+                    },
+                  );
+                }),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: Consumer<SearchPageProvider>(
+                      builder: (context, Provider, _) {
+                    final filteredTransactions = filterTransactions(
+                        Provider.searchQuery, Provider.selectedDate);
+
+                    return ListView.builder(
+                      itemCount: filteredTransactions.length,
+                      itemBuilder: (context, index) {
+                        final transaction = filteredTransactions[index];
+                        return Dismissible(
+                          key: Key(transaction.id!),
+                          onDismissed: (direction) {
+                            deleteTransactions(transaction.id!);
+                          },
+                          background: Container(
+                            color: Colors.grey,
+                            alignment: Alignment.centerRight,
+                            child: const Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                            ),
+                          ),
+                          child: Card(
+                            child: ListTile(
+                              title: Text(
+                                'Amount: ${transaction.amount.toStringAsFixed(2)}',
+                                style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromARGB(255, 12, 46, 62)),
+                              ),
+                              subtitle: Text(
+                                DateFormat.yMd().format(transaction.date),
+                                style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.red),
+                              ),
+                              trailing: Text(
+                                transaction.purpose,
+                                style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromARGB(255, 12, 46, 62)),
+                              ),
+                            ),
+                          ),
+                        );
                       },
-                      background: Container(
-                        color: Colors.grey,
-                        alignment: Alignment.centerRight,
-                        child: const Icon(
-                          Icons.delete,
-                          color: Colors.white,
-                        ),
-                      ),
-                      child: Card(
-                        child: ListTile(
-                          title: Text(
-                            'Amount: ${transaction.amount.toStringAsFixed(2)}',
-                            style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Color.fromARGB(255, 12, 46, 62)),
-                          ),
-                          subtitle: Text(
-                            DateFormat.yMd().format(transaction.date),
-                            style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.red),
-                          ),
-                          trailing: Text(
-                            transaction.purpose,
-                            style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: Color.fromARGB(255, 12, 46, 62)),
-                          ),
-                        ),
-                      ),
                     );
-                  },
+                  }),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

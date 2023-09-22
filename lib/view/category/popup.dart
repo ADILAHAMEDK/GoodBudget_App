@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:money_manager/db_function/category/category_db.dart';
 import 'package:money_manager/models/category/category_model.dart';
 
-ValueNotifier<CategoryType> selectedCategoryNotifier = ValueNotifier(CategoryType.income);
+ValueNotifier<CategoryType> selectedCategoryNotifier =
+    ValueNotifier(CategoryType.income);
 
 Future<void> showCategoryAddPopup(BuildContext context) async {
   final _nameEditingController = TextEditingController();
@@ -29,7 +30,9 @@ Future<void> showCategoryAddPopup(BuildContext context) async {
                         child: TextFormField(
                           controller: _nameEditingController,
                           keyboardType: TextInputType.number,
-                          inputFormatters: [LengthLimitingTextInputFormatter(10)],
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(10)
+                          ],
                           decoration: const InputDecoration(
                             hintText: 'phone number',
                             border: OutlineInputBorder(),
@@ -46,8 +49,10 @@ Future<void> showCategoryAddPopup(BuildContext context) async {
                         padding: EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            RadioButton(title: 'Income', type: CategoryType.income),
-                            RadioButton(title: 'Expense', type: CategoryType.expense),
+                            RadioButton(
+                                title: 'Income', type: CategoryType.income),
+                            RadioButton(
+                                title: 'Expense', type: CategoryType.expense),
                           ],
                         ),
                       ),
@@ -55,23 +60,29 @@ Future<void> showCategoryAddPopup(BuildContext context) async {
                         padding: const EdgeInsets.all(8.0),
                         child: ElevatedButton(
                           onPressed: () {
-                            if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+                            if (_formKey.currentState != null &&
+                                _formKey.currentState!.validate()) {
                               final _name = _nameEditingController.text;
                               final _type = selectedCategoryNotifier.value;
                               final _category = CategoryModel(
-                                id: DateTime.now().millisecondsSinceEpoch.toString(),
+                                id: DateTime.now()
+                                    .millisecondsSinceEpoch
+                                    .toString(),
                                 name: _name,
                                 type: _type,
                               );
-                
+
                               CategoryDB.instance.insertCategory(_category);
                               Navigator.of(ctx).pop();
                             }
                           },
-                          child:const SizedBox(
+                          child: const SizedBox(
                             width: 100,
-                            child:  Text('Add',textAlign: TextAlign.center,),
+                            child: Text(
+                              'Add',
+                              textAlign: TextAlign.center,
                             ),
+                          ),
                         ),
                       ),
                     ],
@@ -120,7 +131,3 @@ class RadioButton extends StatelessWidget {
     );
   }
 }
-
-
-
-

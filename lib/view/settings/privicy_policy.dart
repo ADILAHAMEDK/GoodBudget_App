@@ -5,17 +5,19 @@ class PrivacyPolicyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 12, 46, 62),
-        title:const Text('Privacy Policy'),
-      // leading: IconButton(onPressed: (){
-      //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ScreenSettings()));
-      //   }, icon: const Icon(Icons.arrow_back)),
+        title: const Text('Privacy Policy'),
+        // leading: IconButton(onPressed: (){
+        //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ScreenSettings()));
+        //   }, icon: const Icon(Icons.arrow_back)),
       ),
-      body:const SingleChildScrollView(
-        child: Padding(padding:EdgeInsets.all(10),
-        child:Text("""Privacy Policy for [Your Money Manager App]
+      body: const SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Text(
+            """Privacy Policy for [Your Money Manager App]
 
 Last Updated: [Date]
 
@@ -70,8 +72,7 @@ We may update this Privacy Policy to reflect changes in our practices or for oth
 9. Contact Us
 
 If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at [contact@email.com].""",
-),
-        
+          ),
         ),
       ),
     );

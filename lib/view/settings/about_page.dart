@@ -11,12 +11,13 @@ class AboutPage extends StatelessWidget {
         //   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ScreenSettings()));
         // }, icon: const Icon(Icons.arrow_back)),
         backgroundColor: const Color.fromARGB(255, 12, 46, 62),
-        title:const Text("About"), 
+        title: const Text("About"),
       ),
-      body:const SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Padding(
-          padding:  EdgeInsets.all(20),
-          child: Text('''Expense Tracking: Money manager apps allow users to record and categorize their expenses. This helps individuals understand where their money is going and identify areas where they can cut costs.
+          padding: EdgeInsets.all(20),
+          child: Text(
+              '''Expense Tracking: Money manager apps allow users to record and categorize their expenses. This helps individuals understand where their money is going and identify areas where they can cut costs.
 
 Budgeting: Many money manager apps offer budgeting features that help users set spending limits for various categories, such as groceries, entertainment, and utilities. The app can then track spending against these budgets and provide alerts when limits are exceeded.
 

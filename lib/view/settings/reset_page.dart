@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:money_manager/helpers/colors.dart';
 import 'package:money_manager/models/category/category_model.dart';
 import 'package:money_manager/models/transaction/transaction_model.dart';
 
@@ -14,20 +15,20 @@ Future<void> resetDB(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        backgroundColor: const Color.fromARGB(255, 12, 46, 62),
+        backgroundColor: AppColors.allBlue,
         title: const Text(
           "Confirm Reset",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: AppColors.allWhite),
         ),
         content: const Text(
           "Are you sure you want to reset",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: AppColors.allWhite),
         ),
         actions: <Widget>[
           TextButton(
             child: const Text(
               "Cancel",
-              style: TextStyle(color: Colors.red),
+              style: TextStyle(color:AppColors.allRed),
             ),
             onPressed: () {
               Navigator.of(context).pop(false);
@@ -36,7 +37,7 @@ Future<void> resetDB(
           TextButton(
             child: const Text(
               "Reset",
-              style: TextStyle(color: Colors.red),
+              style: TextStyle(color: AppColors.allRed),
             ),
             onPressed: () {
               Navigator.of(context).pop(true);

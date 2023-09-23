@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../homeScreen/home_screen.dart';
+import 'package:money_manager/helpers/colors.dart';
+import '../../view/homeScreen/home_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -16,8 +17,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       builder: (BuildContext ctx, int updatedIndex, Widget? _) {
         return BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            selectedItemColor: Colors.red,
-            unselectedItemColor: const Color.fromARGB(255, 12, 46, 62),
+            selectedItemColor:AppColors.allRed ,
+            unselectedItemColor: AppColors.allBlue,
             currentIndex: updatedIndex,
             onTap: (newIndex) {
               HomeScreen.selectedIndexNotifier.value = newIndex;

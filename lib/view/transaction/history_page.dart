@@ -3,9 +3,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:money_manager/db_function/category/category_db.dart';
 import 'package:money_manager/db_function/transaction/transaction_db.dart';
+import 'package:money_manager/helpers/colors.dart';
 import 'package:money_manager/models/category/category_model.dart';
 import 'package:money_manager/models/transaction/transaction_model.dart';
-
 import '../editTransactionScreen/editTransactionScreen.dart';
 
 class HistoryPage extends StatelessWidget {
@@ -44,7 +44,7 @@ class HistoryPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 12, 46, 62),
+        backgroundColor: AppColors.allBlue,
         title: const Text('History'),
         centerTitle: true,
       ),
@@ -101,20 +101,19 @@ class HistoryPage extends StatelessWidget {
                               child: ListTile(
                                 leading: CircleAvatar(
                                   radius: 20,
-                                  backgroundColor: _value.type ==
-                                          CategoryType.income
-                                      ? const Color.fromARGB(255, 255, 255, 255)
-                                      : const Color.fromARGB(
-                                          255, 255, 255, 255),
+                                  backgroundColor:
+                                      _value.type == CategoryType.income
+                                          ? AppColors.allWhite
+                                          : AppColors.allWhite,
                                   child: _value.type == CategoryType.income
                                       ? const Icon(
                                           Icons.arrow_circle_up,
-                                          color: Colors.green,
+                                          color: AppColors.allGreen,
                                           size: 30,
                                         )
                                       : const Icon(
                                           Icons.arrow_circle_down_outlined,
-                                          color: Colors.red,
+                                          color: AppColors.allRed,
                                           size: 30,
                                         ),
 
@@ -127,7 +126,7 @@ class HistoryPage extends StatelessWidget {
                                 title: Text(
                                   'RS: ${_value.amount}',
                                   style: const TextStyle(
-                                    color: Color.fromARGB(255, 12, 46, 62),
+                                    color: AppColors.allBlue,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -147,8 +146,7 @@ class HistoryPage extends StatelessWidget {
                                     Text(
                                       _value.purpose,
                                       style: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 12, 46, 62),
+                                          color: AppColors.allBlue,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 15),
                                     ),
@@ -158,7 +156,7 @@ class HistoryPage extends StatelessWidget {
                                     Text(
                                       _value.category.name,
                                       style: const TextStyle(
-                                        color: Color.fromARGB(255, 12, 46, 62),
+                                        color: AppColors.allBlue,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),

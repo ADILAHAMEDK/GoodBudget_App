@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:money_manager/db_function/category/category_db.dart';
 import 'package:money_manager/db_function/transaction/transaction_db.dart';
+import 'package:money_manager/helpers/colors.dart';
 import 'package:money_manager/models/category/category_model.dart';
 import 'package:money_manager/models/transaction/transaction_model.dart';
 import 'package:money_manager/view/editTransactionScreen/editTransactionScreen.dart';
@@ -55,7 +56,7 @@ class ScreenTransaction extends StatelessWidget {
                       borderRadius: BorderRadius.circular(
                         32.0,
                       ),
-                      color: Colors.white70,
+                      color: AppColors.allWhite,
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(5),
@@ -76,7 +77,7 @@ class ScreenTransaction extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 24.0,
                       fontWeight: FontWeight.w700,
-                      color: Color.fromARGB(255, 12, 46, 62),
+                      color: AppColors.allBlue,
                     ),
                   ),
                 ],
@@ -120,7 +121,7 @@ class ScreenTransaction extends StatelessWidget {
                     ),
                     child: Container(
                       decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 12, 46, 62),
+                        color: AppColors.allBlue,
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                       padding: const EdgeInsets.symmetric(
@@ -134,7 +135,7 @@ class ScreenTransaction extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 22.0,
-                              color: Colors.yellow,
+                              color: AppColors.allYellow,
                             ),
                           ),
                           const SizedBox(
@@ -146,7 +147,7 @@ class ScreenTransaction extends StatelessWidget {
                             style: const TextStyle(
                               fontSize: 26.0,
                               fontWeight: FontWeight.w700,
-                              color: Colors.white,
+                              color: AppColors.allWhite,
                             ),
                           ),
                           const SizedBox(
@@ -165,7 +166,7 @@ class ScreenTransaction extends StatelessWidget {
                                         child: Text(
                                           'Income',
                                           style: TextStyle(
-                                            color: Colors.yellow,
+                                            color: AppColors.allYellow,
                                             fontSize: 20,
                                             fontWeight: FontWeight.w700,
                                           ),
@@ -182,7 +183,7 @@ class ScreenTransaction extends StatelessWidget {
                                     child: Text(
                                       ' ${totalIncome.toStringAsFixed(2)}',
                                       style: const TextStyle(
-                                        color: Colors.white,
+                                        color: AppColors.allWhite,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -200,7 +201,7 @@ class ScreenTransaction extends StatelessWidget {
                                         child: Text(
                                           'Expence',
                                           style: TextStyle(
-                                            color: Colors.yellow,
+                                            color: AppColors.allYellow,
                                             fontSize: 20,
                                             fontWeight: FontWeight.w700,
                                           ),
@@ -217,7 +218,7 @@ class ScreenTransaction extends StatelessWidget {
                                     child: Text(
                                       ' ${totalExpenses.toStringAsFixed(2)}',
                                       style: const TextStyle(
-                                        color: Colors.white,
+                                        color: AppColors.allYellow,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -242,7 +243,7 @@ class ScreenTransaction extends StatelessWidget {
                           child: Text(
                             'Recent Transection',
                             style: TextStyle(
-                              color: Color.fromARGB(255, 12, 46, 62),
+                              color: AppColors.allBlue,
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
                             ),
@@ -261,7 +262,7 @@ class ScreenTransaction extends StatelessWidget {
                             'See all',
                             style: TextStyle(
                               fontSize: 18,
-                              color: Color.fromARGB(255, 12, 46, 62),
+                              color: AppColors.allBlue,
                             ),
                           ),
                         ),
@@ -310,36 +311,35 @@ class ScreenTransaction extends StatelessWidget {
                               elevation: 0,
                               child: ListTile(
                                 leading: CircleAvatar(
-                                  radius: 20,
-                                  child: _value.type == CategoryType.income
-                                      ? const Icon(
-                                          Icons.arrow_circle_up,
-                                          color: Colors.green,
-                                          size: 30,
-                                        )
-                                      : const Icon(
-                                          Icons.arrow_circle_down_outlined,
-                                          color: Colors.red,
-                                          size: 30,
-                                        ),
-                                  backgroundColor: _value.type ==
-                                          CategoryType.income
-                                      ? const Color.fromARGB(255, 255, 255, 255)
-                                      : const Color.fromARGB(
-                                          255, 255, 255, 255),
-                                  // if()if
+                                    radius: 20,
+                                    child: _value.type == CategoryType.income
+                                        ? const Icon(
+                                            Icons.arrow_circle_up,
+                                            color: AppColors.allGreen,
+                                            size: 30,
+                                          )
+                                        : const Icon(
+                                            Icons.arrow_circle_down_outlined,
+                                            color: AppColors.allRed,
+                                            size: 30,
+                                          ),
+                                    backgroundColor:
+                                        _value.type == CategoryType.income
+                                            ? AppColors.allWhite
+                                            : AppColors.allWhite
+                                    // if()if
 
-                                  // radius: 50,
-                                  // child:Icon(Icons.arrow_outward_rounded),
-                                  // // Text(parseDate(_value.date),
-                                  // // textAlign: TextAlign.center,
-                                  // // ),
-                                  // backgroundColor: _value.type == CategoryType.income? Colors.green : Colors.red,
-                                ),
+                                    // radius: 50,
+                                    // child:Icon(Icons.arrow_outward_rounded),
+                                    // // Text(parseDate(_value.date),
+                                    // // textAlign: TextAlign.center,
+                                    // // ),
+                                    // backgroundColor: _value.type == CategoryType.income? Colors.green : Colors.red,
+                                    ),
                                 title: Text(
                                   'RS: ${_value.amount}',
                                   style: const TextStyle(
-                                    color: Color.fromARGB(255, 12, 46, 62),
+                                    color: AppColors.allBlue,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -357,8 +357,7 @@ class ScreenTransaction extends StatelessWidget {
                                     Text(
                                       _value.purpose,
                                       style: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 12, 46, 62),
+                                          color: AppColors.allWhite,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 15),
                                     ),
@@ -368,7 +367,7 @@ class ScreenTransaction extends StatelessWidget {
                                     Text(
                                       _value.category.name,
                                       style: const TextStyle(
-                                        color: Color.fromARGB(255, 12, 46, 62),
+                                        color: AppColors.allWhite,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),

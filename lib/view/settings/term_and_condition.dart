@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_manager/helpers/colors.dart';
 
 class TermsAndConditions extends StatelessWidget {
   const TermsAndConditions({super.key});
@@ -8,7 +9,7 @@ class TermsAndConditions extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Terms And Conditions'),
-        backgroundColor: const Color.fromARGB(255, 12, 46, 62),
+        backgroundColor: AppColors.allBlue,
         // leading:  IconButton(onPressed: (){
         //    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const ScreenSettings()));
         // }, icon:const Icon(Icons.arrow_back))

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_manager/db_function/category/category_db.dart';
 import 'package:money_manager/db_function/transaction/transaction_db.dart';
+import 'package:money_manager/helpers/colors.dart';
 import 'package:money_manager/models/category/category_model.dart';
 import 'package:money_manager/models/transaction/transaction_model.dart';
 
@@ -34,7 +35,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Transaction'),
-        backgroundColor: const Color.fromARGB(255, 12, 46, 62),
+        backgroundColor: AppColors.allBlue,
       ),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -51,7 +52,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: Color.fromARGB(255, 12, 46, 62)),
+                              color: AppColors.allBlue),
                         ),
                         hintText: 'Description',
                         hintStyle: TextStyle(
@@ -172,11 +173,11 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   ),
                   // Category Type
                   DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Select phone number',
                       icon: Icon(
                         Icons.menu,
-                        color: Color.fromARGB(255, 12, 46, 62),
+                        color: AppColors.allBlue,
                       ),
                     ),
                     // hint:const Text('Select Category'),

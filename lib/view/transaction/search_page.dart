@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:money_manager/db_function/transaction/transaction_db.dart';
+import 'package:money_manager/helpers/colors.dart';
 import 'package:money_manager/models/transaction/transaction_model.dart';
 import 'package:provider/provider.dart';
 import '../../controller/provider/searchPageProvider.dart';
@@ -47,7 +48,7 @@ class _ScreenSearchPageState extends State<ScreenSearchPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 12, 46, 62),
+          backgroundColor: AppColors.allBlue,
           leading: IconButton(
               onPressed: () {
                 Navigator.pushReplacement(context,
@@ -129,11 +130,11 @@ class _ScreenSearchPageState extends State<ScreenSearchPage> {
                             deleteTransactions(transaction.id!);
                           },
                           background: Container(
-                            color: Colors.grey,
+                            color:AppColors.allGray ,
                             alignment: Alignment.centerRight,
                             child: const Icon(
                               Icons.delete,
-                              color: Colors.white,
+                              color: AppColors.allRed,
                             ),
                           ),
                           child: Card(
@@ -143,21 +144,21 @@ class _ScreenSearchPageState extends State<ScreenSearchPage> {
                                 style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
-                                    color: Color.fromARGB(255, 12, 46, 62)),
+                                    color: AppColors.allBlue),
                               ),
                               subtitle: Text(
                                 DateFormat.yMd().format(transaction.date),
                                 style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.red),
+                                    color: AppColors.allRed),
                               ),
                               trailing: Text(
                                 transaction.purpose,
                                 style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
-                                    color: Color.fromARGB(255, 12, 46, 62)),
+                                    color: AppColors.allBlue),
                               ),
                             ),
                           ),

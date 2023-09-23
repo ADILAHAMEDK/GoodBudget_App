@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_manager/db_function/category/category_db.dart';
+import 'package:money_manager/helpers/colors.dart';
 import 'package:money_manager/models/category/category_model.dart';
 
 class IncomeList extends StatelessWidget {
@@ -22,7 +23,7 @@ class IncomeList extends StatelessWidget {
                     },
                     icon: const Icon(
                       Icons.delete,
-                      color: Colors.red,
+                      color: AppColors.allRed,
                     )),
               ),
             );

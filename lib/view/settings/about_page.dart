@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_manager/helpers/colors.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -10,7 +11,7 @@ class AboutPage extends StatelessWidget {
         // leading: IconButton(onPressed: (){
         //   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ScreenSettings()));
         // }, icon: const Icon(Icons.arrow_back)),
-        backgroundColor: const Color.fromARGB(255, 12, 46, 62),
+        backgroundColor: AppColors.allBlue,
         title: const Text("About"),
       ),
       body: const SingleChildScrollView(

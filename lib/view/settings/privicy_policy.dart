@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_manager/helpers/colors.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
   const PrivacyPolicyPage({super.key});
@@ -7,7 +8,7 @@ class PrivacyPolicyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 12, 46, 62),
+        backgroundColor: AppColors.allBlue,
         title: const Text('Privacy Policy'),
         // leading: IconButton(onPressed: (){
         //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ScreenSettings()));

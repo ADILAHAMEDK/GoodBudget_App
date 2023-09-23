@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => AddTransactionProvider()),
         ChangeNotifierProvider(create: (context) => SearchPageProvider()),
-        ChangeNotifierProvider(create: (context) => EditPageProvider(_transaction as TransactionModel)),
+        ChangeNotifierProvider(create: (context) => EditPageProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -54,7 +54,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}
-
-class _transaction {
 }

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:money_manager/helpers/colors.dart';
 import 'package:money_manager/view/settings/about_page.dart';
 import 'package:money_manager/view/settings/privicy_policy.dart';
 import 'package:money_manager/view/settings/reset_page.dart';
@@ -14,7 +15,7 @@ class ScreenSettings extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('App Settings'),
-        backgroundColor: const Color.fromARGB(255, 12, 46, 62),
+        backgroundColor: AppColors.allBlue,
       ),
       body: ListView(
         children: <Widget>[
@@ -31,7 +32,7 @@ class ScreenSettings extends StatelessWidget {
               leading: const Icon(
                 Icons.info,
                 size: 35,
-                color: Colors.blue,
+                color: AppColors.allSkyBlue,
               ),
               onTap: () {
                 Navigator.push(context,
@@ -49,7 +50,7 @@ class ScreenSettings extends StatelessWidget {
                 leading: const Icon(
                   Icons.refresh,
                   size: 35,
-                  color: Colors.blue,
+                  color: AppColors.allSkyBlue,
                 ),
                 onTap: () {
                   resetDB(context);
@@ -68,7 +69,7 @@ class ScreenSettings extends StatelessWidget {
               leading: const Icon(
                 Icons.privacy_tip_sharp,
                 size: 35,
-                color: Colors.blue,
+                color: AppColors.allSkyBlue,
               ),
               onTap: () {
                 Navigator.push(
@@ -90,7 +91,7 @@ class ScreenSettings extends StatelessWidget {
               ),
               leading: const Icon(
                 Icons.sticky_note_2_outlined,
-                color: Colors.blue,
+                color: AppColors.allSkyBlue,
                 size: 35,
               ),
               onTap: () {
@@ -114,21 +115,21 @@ class ScreenSettings extends StatelessWidget {
               leading: const Icon(
                 Icons.exit_to_app_rounded,
                 size: 35,
-                color: Colors.blue,
+                color:  AppColors.allSkyBlue,
               ),
               onTap: () {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        backgroundColor: const Color.fromARGB(255, 12, 46, 62),
+                        backgroundColor: AppColors.allBlue,
                         title: const Text(
                           'Conirm Exit',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: AppColors.allWhite),
                         ),
                         content: const Text(
                           'Are you sure you want to exit the app?',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: AppColors.allWhite),
                         ),
                         actions: <Widget>[
                           TextButton(
@@ -137,7 +138,7 @@ class ScreenSettings extends StatelessWidget {
                             },
                             child: const Text(
                               'Cancel',
-                              style: TextStyle(color: Colors.red),
+                              style: TextStyle(color: AppColors.allRed),
                             ),
                           ),
                           TextButton(
@@ -146,7 +147,7 @@ class ScreenSettings extends StatelessWidget {
                             },
                             child: const Text(
                               'Exit',
-                              style: TextStyle(color: Colors.red),
+                              style: TextStyle(color: AppColors.allRed),
                             ),
                           )
                         ],

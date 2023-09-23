@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:money_manager/helpers/colors.dart';
 import '../addTransactionScreen/add_transaction.dart';
-import '../bottomNavigationBar/bottom_navigation_bar.dart';
+import '../../widgets/bottomNavigationBar/bottom_navigation_bar.dart';
 import '../category/popup.dart';
 import '../category/screen_category.dart';
 import '../chart/screen_chart.dart';
@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
 
   static ValueNotifier<int> selectedIndexNotifier = ValueNotifier(0);
 
-  final _pages = [
+  final pages = [
     const ScreenTransaction(),
     const ScreenCategory(),
     Chart(checkboxStatus: true, currentDate: DateTime.now()),
@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
         child: ValueListenableBuilder(
           valueListenable: selectedIndexNotifier,
           builder: (BuildContext context, int updatedIndex, _) {
-            return _pages[updatedIndex];
+            return pages[updatedIndex];
           },
         ),
       ),
@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
             //  CategoryDB().insertCategory(_sample);
           }
         },
-        backgroundColor: const Color.fromARGB(255, 12, 46, 62),
+        backgroundColor: AppColors.allBlue,
         child: const Icon(Icons.add),
       ),
     );

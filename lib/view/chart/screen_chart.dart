@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:money_manager/helpers/colors.dart';
 import '../../db_function/transaction/transaction_db.dart';
 import '../../models/category/category_model.dart';
 import '../../models/transaction/transaction_model.dart';
@@ -102,7 +103,7 @@ class ChartState extends State<Chart> {
   }
 
   List<PieChartSectionData> generateChartData(double value1, double value2) {
-    final List<Color> colors = [Colors.green[900]!, Colors.red[400]!];
+    final List<Color> colors = [AppColors.alldarkgreen!, AppColors.allRed!];
     final List<double> values = [value1, value2];
 
     return List.generate(2, (i) {
@@ -110,7 +111,7 @@ class ChartState extends State<Chart> {
       final fontSize = isTouched ? 20.0 : 16.0;
       final radius = isTouched ? 110.0 : 100.0;
 
-      const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
+      const shadows = [Shadow(color: AppColors.allBlack, blurRadius: 2)];
 
       return PieChartSectionData(
         color: colors[i],
@@ -120,7 +121,7 @@ class ChartState extends State<Chart> {
         titleStyle: TextStyle(
           fontSize: fontSize,
           fontWeight: FontWeight.bold,
-          color: const Color(0xffffffff),
+          color: AppColors.allWhite,
           shadows: shadows,
         ),
       );
@@ -138,7 +139,7 @@ class ChartState extends State<Chart> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: const Color.fromARGB(255, 12, 46, 62),
+        backgroundColor: AppColors.allBlue,
         title: const Center(child: Text('Charts')),
       ),
       body: Center(
@@ -155,20 +156,20 @@ class ChartState extends State<Chart> {
                     elevation: 10,
                     underline: Container(
                       height: 2,
-                      color: const Color.fromARGB(255, 255, 255, 255),
+                      color: AppColors.allWhite,
                     ),
-                    dropdownColor: Colors.white,
+                    dropdownColor: AppColors.allWhite ,
                     // Color.fromARGB(255, 0, 0, 0),
-                    focusColor: Colors.white,
+                    focusColor:  AppColors.allWhite,
                     alignment: Alignment.bottomCenter,
                     padding: const EdgeInsetsDirectional.all(3),
                     icon: Icon(
                       Icons.arrow_drop_down,
-                      color: Colors.black,
+                      color: AppColors.allBlack,
                     ),
                     borderRadius: BorderRadius.circular(20),
                     value: _selectedValue,
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(color:  AppColors.allWhite),
                     items: <String>['Day', 'Week', 'Month']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
@@ -177,7 +178,7 @@ class ChartState extends State<Chart> {
                           value,
                           style: const TextStyle(
                             fontSize: 15,
-                            color: Colors.black,
+                            color: AppColors.allBlack,
                             // Color.fromARGB(255, 255, 255, 255),
                             fontFamily: AutofillHints.username,
                           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_manager/helpers/colors.dart';
 import '../homeScreen/home_screen.dart';
 import 'package:money_manager/db_function/category/category_db.dart';
 
@@ -27,7 +28,7 @@ class _ScreenCategoryState extends State<ScreenCategory>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 12, 46, 62),
+        backgroundColor: AppColors.allBlue,
         title: const Text('Select Phone Number'),
         centerTitle: true,
       ),
@@ -37,8 +38,8 @@ class _ScreenCategoryState extends State<ScreenCategory>
           children: [
             TabBar(
                 controller: _tabController,
-                labelColor: Colors.black,
-                unselectedLabelColor: Colors.grey,
+                labelColor: AppColors.allBlack,
+                unselectedLabelColor: AppColors.allGray,
                 tabs: const [
                   Tab(text: 'Income'),
                   Tab(text: 'Expence'),

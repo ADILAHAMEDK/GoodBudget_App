@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:money_manager/controller/provider/editPageProvider.dart';
 import 'package:money_manager/db_function/transaction/transaction_db.dart';
 import 'package:money_manager/helpers/colors.dart';
 import 'package:money_manager/models/category/category_model.dart';
+import 'package:provider/provider.dart';
 import '../homeScreen/home_screen.dart';
 import '../../../models/transaction/transaction_model.dart';
 
@@ -35,6 +37,7 @@ class _EditPageState extends State<EditPage> {
 
   @override
   Widget build(BuildContext context) {
+   final edits= Provider.of<EditPageProvider>(context,listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.allBlue,
@@ -76,15 +79,17 @@ class _EditPageState extends State<EditPage> {
                   decoration: InputDecoration(
                     labelText: 'Amount',
                     border: const OutlineInputBorder(),
-                    suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _secureText = !_secureText;
-                          });
-                        },
-                        icon: const Icon(
-                          Icons.remove_red_eye,
-                        )),
+                    suffixIcon: Consumer<EditPageProvider>( builder: (context,edit,child){
+return IconButton(
+                          onPressed: () {
+                          edits.toggleSecureText();
+                          },
+                          icon: const Icon(
+                            Icons.remove_red_eye,
+                          ));
+                    },
+                      
+                    ),
                   ),
                   obscureText: _secureText,
                   validator: (value) {

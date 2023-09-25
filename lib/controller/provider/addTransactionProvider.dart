@@ -9,4 +9,13 @@ class AddTransactionProvider extends ChangeNotifier {
     _isSecure = !_isSecure;
     notifyListeners();
   }
+  
+  // bool _secureText = true;
+
+  // bool get secureText => _secureText;
+
+  // void toggleSecureText() {
+  //   _secureText = !_secureText;
+  //   notifyListeners();
+  // }
 }

@@ -115,7 +115,7 @@ class ScreenSettings extends StatelessWidget {
               leading: const Icon(
                 Icons.exit_to_app_rounded,
                 size: 35,
-                color:  AppColors.allSkyBlue,
+                color: AppColors.allSkyBlue,
               ),
               onTap: () {
                 showDialog(

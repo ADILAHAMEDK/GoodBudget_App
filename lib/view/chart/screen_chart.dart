@@ -7,13 +7,13 @@ import '../../models/category/category_model.dart';
 import '../../models/transaction/transaction_model.dart';
 
 class Chart extends StatefulWidget {
-  final bool checkboxStatus;
-  final DateTime currentDate;
+  // final bool checkboxStatus;
+  // final DateTime currentDate;
 
-  const Chart({
-    required this.checkboxStatus,
-    required this.currentDate,
-  });
+  // const Chart({
+  //   required this.checkboxStatus,
+  //   required this.currentDate,
+  // });
 
   @override
   State<StatefulWidget> createState() => ChartState();
@@ -158,9 +158,9 @@ class ChartState extends State<Chart> {
                       height: 2,
                       color: AppColors.allWhite,
                     ),
-                    dropdownColor: AppColors.allWhite ,
+                    dropdownColor: AppColors.allWhite,
                     // Color.fromARGB(255, 0, 0, 0),
-                    focusColor:  AppColors.allWhite,
+                    focusColor: AppColors.allWhite,
                     alignment: Alignment.bottomCenter,
                     padding: const EdgeInsetsDirectional.all(3),
                     icon: Icon(
@@ -169,7 +169,7 @@ class ChartState extends State<Chart> {
                     ),
                     borderRadius: BorderRadius.circular(20),
                     value: _selectedValue,
-                    style: const TextStyle(color:  AppColors.allWhite),
+                    style: const TextStyle(color: AppColors.allWhite),
                     items: <String>['Day', 'Week', 'Month']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(

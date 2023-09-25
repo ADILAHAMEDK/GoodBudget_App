@@ -28,7 +28,7 @@ Future<void> resetDB(
           TextButton(
             child: const Text(
               "Cancel",
-              style: TextStyle(color:AppColors.allRed),
+              style: TextStyle(color: AppColors.allRed),
             ),
             onPressed: () {
               Navigator.of(context).pop(false);

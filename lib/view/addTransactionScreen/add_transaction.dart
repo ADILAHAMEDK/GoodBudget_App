@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:money_manager/controller/provider/addTransactionProvider.dart';
 import 'package:money_manager/db_function/category/category_db.dart';
 import 'package:money_manager/db_function/transaction/transaction_db.dart';
 import 'package:money_manager/helpers/colors.dart';
 import 'package:money_manager/models/category/category_model.dart';
 import 'package:money_manager/models/transaction/transaction_model.dart';
+import 'package:provider/provider.dart';
 
 class AddTransactionPage extends StatefulWidget {
   static const routeName = 'add transaction';
@@ -32,6 +34,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
 
   @override
   Widget build(BuildContext context) {
+    final secureEye = Provider.of<AddTransactionProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Transaction'),
@@ -51,8 +54,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: AppColors.allBlue),
+                          borderSide: BorderSide(color: AppColors.allBlue),
                         ),
                         hintText: 'Description',
                         hintStyle: TextStyle(
@@ -69,35 +71,42 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                     height: 10,
                   ),
                   // Amount
-                  TextFormField(
-                    controller: _amountTextEditingController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _secureText = !_secureText;
-                              });
-                            },
-                            icon: const Icon(
-                              Icons.remove_red_eye,
-                            )),
-                        hintText: 'Amount',
-                        hintStyle: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                        )),
-                    obscureText: _secureText,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter an Amount';
-                      }
-                      if (double.tryParse(value) == null) {
-                        return 'Please enter a valid numeric amount';
-                      }
-                      return null;
-                    },
-                  ),
+                  Consumer<AddTransactionProvider>(
+                      builder: (context, addTransactionProvider, _) {
+                    return TextFormField(
+                      controller: _amountTextEditingController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                // setState(() {
+                                //   _secureText = !_secureText;
+                                // });
+                                addTransactionProvider.changeSecureText();
+                              },
+                              icon: Icon(
+                                // Icons.remove_red_eye,
+                                addTransactionProvider.isSecure
+                                    ? Icons.remove_red_eye
+                                    : Icons.visibility_off,
+                              )),
+                          hintText: 'Amount',
+                          hintStyle: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                          )),
+                      obscureText: addTransactionProvider.isSecure,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter an Amount';
+                        }
+                        if (double.tryParse(value) == null) {
+                          return 'Please enter a valid numeric amount';
+                        }
+                        return null;
+                      },
+                    );
+                  }),
 
                   SizedBox(
                     height: 10,

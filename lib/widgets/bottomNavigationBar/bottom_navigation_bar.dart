@@ -17,7 +17,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       builder: (BuildContext ctx, int updatedIndex, Widget? _) {
         return BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            selectedItemColor:AppColors.allRed ,
+            selectedItemColor: AppColors.allRed,
             unselectedItemColor: AppColors.allBlue,
             currentIndex: updatedIndex,
             onTap: (newIndex) {

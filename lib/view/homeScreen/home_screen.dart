@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
   final pages = [
     const ScreenTransaction(),
     const ScreenCategory(),
-    Chart(checkboxStatus: true, currentDate: DateTime.now()),
+    Chart(),
     const ScreenSettings(),
   ];
 
